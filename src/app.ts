@@ -3,7 +3,6 @@ type PageData = Record<string, IUserData[]>[];
 interface IState {
   currentPage: number;
   pageData: PageData;
-  paging?: IPaging;
 }
 
 interface IUserData {
@@ -13,14 +12,10 @@ interface IUserData {
   gender: "male" | "female";
 }
 
-interface IPaging {
-  next: string;
-  previous: string;
-}
+
 
 interface IFetchResponse {
   results: PageData;
-  paging?: IPaging;
 }
 
 /** END DEFINE TYPES AND INTERFACES **/
@@ -118,7 +113,6 @@ const shouldDisablePrev = () => {
 const setState = (newState: IState) => {
   state.currentPage = newState?.currentPage;
   state.pageData = newState?.pageData;
-  state.paging = newState?.paging;
 };
 
 const fetchPageData = (page = 1) => {
@@ -129,7 +123,6 @@ const fetchPageData = (page = 1) => {
       setState({
         pageData: data.results,
         currentPage: page,
-        paging: data?.paging,
       });
       insertIntoDom();
       hideLoadingUi();
