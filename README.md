@@ -1,4 +1,5 @@
 # Frontend Assessment
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/d1a10a9630e747e4af7051df45168b44)](https://www.codacy.com/gh/ogheneovo12/talentql-pipeline-assesment/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ogheneovo12/talentql-pipeline-assesment&amp;utm_campaign=Badge_Grade)
 
 Build and deploy a very simple frontend app for paginated data, that does the following
 
