@@ -1,62 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,800&display=swap"
+      rel="stylesheet"
+    />
     <title>Paginated Data</title>
+    <link rel="stylesheet" href="./scss/styles.css" />
+  </head>
 
-    <link rel="stylesheet" href="style.css">
-</head>
+  <body>
+    <h3 class="title">paginated random data of app users</h3>
+    <div class="container">
+      <div class="table-container">
+        <div class="loader-overlay">
+          <div class="lds-facebook">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th># No.</th>
+              <th>Gender</th>
+              <th>Age</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-<body>
-
-    <table>
-        <caption>paginated random data of app users</caption>
-        <thead>
-            <tr>
-                <td># No.</td>
-                <td>Gender</td>
-                <td>Age</td>
-            </tr>
-        </thead>
-        <tbody data-sink>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div class="btn-group">
-        <button data-prevbtn>Previous</button>
-        <button data-nextbtn>Next</button>
-        <label data-pageview></label>
+      <div class="footer-group">
+        <label data-pageview>Page:<span id="page_indicator"> </span></label>
+        <div class="btn-group">
+          <button id="prev" data-prevbtn>Previous</button>
+          <button id="next" data-nextbtn>Next</button>
+        </div>
+      </div>
     </div>
 
     <script type="module" src="app.ts"></script>
-</body>
-
+  </body>
 </html>
