@@ -11,9 +11,6 @@ interface IUserData {
   age: number;
   gender: "male" | "female";
 }
-
-
-
 interface IFetchResponse {
   results: PageData;
 }
@@ -82,8 +79,9 @@ const createTd = (textContent: string) => {
 const createTr = (rowData: IUserData, rowIndex: number) => {
   const Tr = document.createElement("tr");
   Tr.dataset["entryid"] = rowData.id;
+  const startIndex = 5 * state.currentPage - 4;
   Tr.replaceChildren(
-    createTd(`${rowIndex}`),
+    createTd(`${startIndex + rowIndex} `),
     createTd(rowData.gender),
     createTd(`${rowData.age}`)
   );
