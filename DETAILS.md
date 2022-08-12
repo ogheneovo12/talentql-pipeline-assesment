@@ -8,7 +8,9 @@ expected to populate the table with data fetched from [**_https://randomapi.com/
 
  
 #### The App State:
-The application maintained a single mutable state property called **state**, which aids in keeping track of the current visible page and data fetched from the endpoint. The state had the following properties.
+In order to keep track of the current visible page and the data obtained from the endpoint, the application maintained a single mutable state property called **state**.
+
+These characteristics applied to the state.
 
     interface  IState {
         currentPage: number;
@@ -22,27 +24,29 @@ The application maintained a single mutable state property called **state**, whi
          gender: "male" | "female";
       }
 
--   **currentPage**: currentPage property to keep track of the active page that is visible to the user. It is also used for handing previous and next navigation on the table.
--   **pageData:** property holds the current page data fetched from the endpoint
+-   **currentPage**: The **currentPage** attribute is used to record the active page that the user can see. Additionally, it is utilized to provide prior and subsequent navigation on the table.
+-   **pageData:** This attribute contains the most recent page information retrieved from the endpoint.
 `type  PageData = Record<string, IUserData[]>[];`
 
 
 **Methods:**
 
-The application was divided into Seperate Unit methods that carries out independent and separate functionalities.
-below are the following method used:
+The application was split up into different unit methods that perform independent and distinct tasks.
+The Methods employed are as follows:
 
- - **showLoadingUi :** to display loader on page data fetch 
- - **hideLoadingUI:** to hide the  loader from screen
+ - **showLoadingUi :**  shows the loader while fetching page data.
+ - **hideLoadingUI:**  removes the loader from view once the data has been retrieved.
  
- - **handleNext:** handles forward page navigation, since fetching data for **page N**  returns  **page N  data** and **page N+1** data, so there's a check if   ** page N+1 **, exists in pageData Record, if it exists, then populate table without fetching from the server, but if it doesn't exist then **fetch page N + 1**  from server.
+ - **handleNext:** manages forward page navigation because retrieving data for ***page N*** yields both ***page N*** and ***page N+1*** data, so there is a check to see if ***page N+1*** exists in the ***pageData*** Record; if it does, the table is populated without retrieving from the server; however, if it doesn't, ***page N + 1*** must be retrieved from the server.
  
- - **handlePrevious:** handles backward page navigation,   this function  will exit ontime if we  areat  the first page  **(N=1)** ,  a check is made to see if **Page N-1** exists on pageData Record,  the table get's updated if found, if not fetch **Page N-1** from api.
- - **createTr and createTd**: They basically creates tables rows and table item respectively, containing  relevant table info,
- - **insertIntoDom**: once table rows have been generated from a page update, this methods inserts the newly created table rows into the Dom.
- - **fetchPageData:** takes page as a parameter, shows the loading ui, then  fetches that page  data , on success/errors hideLoadinUi is called, states get updated and table is redrawn;
+ - **handlePrevious:** handles backward page navigation; if we are on the first page ***(N=1)***, this method will terminate on-time without requesting data from the server or ***pageData*** Records.
+The pageData Record is checked to determine if ***page N-1*** already exists; if it does, the table is updated; if not, ***page N-1*** is fetched from the API.
+ - **createTr and createTd**: They essentially produce table rows **(tr)** and table item **(td)** elements, each of which contains pertinent table information.
+ - **insertIntoDom**: This method inserts the newly constructed table rows into the Dom once the table rows have been generated from a page update.
+ - **fetchPageData:** takes page as an input, displays the loading UI, retrieves the page's contents, and hides the loading message based on success or failure. States are updated and the table UI is redrew.
  
 ### How Does This Work
-On Page load, a request is made to fetch current page data, 
-A check is made to disable the previous button if we are at the first page,
-once the data is fetched successfully, the table get's updated with current page data.
+A request is performed to fetch the first page's ***(N=1)*** data when the page loads.
+If the previous button has to be disabled, ***shouldDisablePrev()*** is invoked.
+The table is updated with the most recent page data as soon as the data is successfully fetched.
+When moving forward (by clicking the next button), server requests are only made for odd pages. Because the api returns both ***N*** and ***N+1*** data for every page requested, when moving backward (by clicking the previous button), ***fetchPageData()*** is always called to get the most recent ***N-1*** data, as long as ***N-1*** doesn't go below **1**.
